@@ -126,6 +126,9 @@ $(document).ready(function()
 				correctAnswer.html(newQuestion.rightAnswer)
 				clearInterval(runClock)
 				freeze = true
+				questionsCompleted++;
+				progressWidth = questionsCompleted/maxQuestions*100
+				progressBar.css('width', progressWidth+'%')
 		
 
 				if (questionsLeft !== 0)
@@ -135,9 +138,6 @@ $(document).ready(function()
 
 				else
 				{
-					questionsCompleted++;
-					progressWidth = questionsCompleted/maxQuestions*100
-					progressBar.css('width', progressWidth+'%')
 					waitForNewQuestion = setInterval(done, 2000)
 				}
 			}
@@ -153,9 +153,6 @@ $(document).ready(function()
 		correctAnswer.html("")
 		freeze = false
 		run(questionBank[0])
-		questionsCompleted++;
-		progressWidth = questionsCompleted/maxQuestions*100
-		progressBar.css('width', progressWidth+'%')
 	}
 
 	var done = function()
@@ -199,6 +196,9 @@ $(document).ready(function()
 			questionsCorrect++;
 			clearInterval(runClock)
 			freeze = true
+			questionsCompleted++;
+			progressWidth = questionsCompleted/maxQuestions*100
+			progressBar.css('width', progressWidth+'%')
 	
 
 			if (questionsLeft !== 0)
@@ -208,9 +208,6 @@ $(document).ready(function()
 
 			else
 			{
-				questionsCompleted++;
-				progressWidth = questionsCompleted/maxQuestions*100
-				progressBar.css('width', progressWidth+'%')
 				waitForNewQuestion = setInterval(done, 2000)
 			}
 		}
@@ -222,6 +219,9 @@ $(document).ready(function()
 			correctAnswer.html(currentQuestion.rightAnswer)
 			clearInterval(runClock)
 			freeze = true
+			questionsCompleted++;
+			progressWidth = questionsCompleted/maxQuestions*100
+			progressBar.css('width', progressWidth+'%')
 	
 			
 			if (questionsLeft !== 0)
@@ -231,9 +231,6 @@ $(document).ready(function()
 
 			else
 			{
-				questionsCompleted++;
-				progressWidth = questionsCompleted/maxQuestions*100
-				progressBar.css('width', progressWidth+'%')
 				waitForNewQuestion = setInterval(done, 2000)
 			}
 		}
