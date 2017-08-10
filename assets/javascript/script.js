@@ -32,13 +32,32 @@ $(document).ready(function()
 		['wrongsdfsdfsdfggg', 'wrosdfsdfsddsdf', 'svssdfsdfdv dfsdfsdfsdfg'],
 		'https://pbs.twimg.com/profile_images/378800000748859587/289a592b2989b6f2dabb76db7fc25947_400x400.jpeg')
 
-	$('game-board').hide()
+	var shuffleArray = function(array)
+	{
+		var result = []
+
+		for (var i=0; i<array.length; i++)
+		{
+			var r = Math.floor(Math.random()*array.length)
+			result.push(array[r])
+			array.splice(r, 1)
+			i = i - 1
+		}		
+
+		return result
+	}
+
+	var getQuestionBank = function()
+	{
+		questionBank.push(question1)
+		questionBank.push(question2)
+		questionBank.push(question3)
+		questionBank.push(question4)
+		questionBank = shuffleArray(questionBank)
+	}
+
 	var questionBank = []
-	questionBank.push(question1)
-	questionBank.push(question2)
-	questionBank.push(question3)
-	questionBank.push(question4)
-	console.log(questionBank)
+	getQuestionBank()
 	var time = $('.time')
 	var result = $('.result')
 	var correctAnswer = $('.correctAnswer')
@@ -81,17 +100,11 @@ $(document).ready(function()
 				potentialAnswers.push(question.wrongAnswers[i])
 			}
 
+			potentialAnswers = shuffleArray(potentialAnswers)
+
 			for (var i=0; i<potentialAnswers.length; i++)
 			{
-				var r = Math.floor(Math.random()*potentialAnswers.length)
-				potentialAnswersShuffled.push(potentialAnswers[r])
-				potentialAnswers.splice(r, 1)
-				i = i - 1
-			}
-
-			for (var i=0; i<potentialAnswersShuffled.length; i++)
-			{
-				$("."+i+"").html(potentialAnswersShuffled[i])
+				$("."+i+"").html(potentialAnswers[i])
 			}
 		}
 
@@ -110,23 +123,18 @@ $(document).ready(function()
 
 				if (questionsLeft !== 0)
 				{
-					waitForNewQuestion = setInterval(userGuessed, 1000)
+					waitForNewQuestion = setInterval(userGuessed, 2000)
 				}
 
 				else
 				{
-					waitForNewQuestion = setInterval(done, 1000)
+					waitForNewQuestion = setInterval(done, 2000)
 				}
 			}
 		}
 
 		getNewQuestion(newQuestion)
 		runClock = setInterval(countDown, 1000)
-	}
-
-	var shuffleArray = function(array)
-	{
-		
 	}
 
 	var userGuessed = function()
@@ -153,13 +161,7 @@ $(document).ready(function()
 		questionsCorrect  = 0
 		questionsWrong = 0
 		questionBank = []
-		console.log("questionBank before: "+questionBank)
-		questionBank.push(question1)
-		console.log("questionBank after pushing first question: "+questionBank)
-		questionBank.push(question2)
-		questionBank.push(question3)
-		questionBank.push(question4)
-		console.log("questionBank after: "+questionBank)
+		getQuestionBank()
 		questionsLeft = questionBank.length	
 	}
 
@@ -184,12 +186,12 @@ $(document).ready(function()
 
 			if (questionsLeft !== 0)
 			{
-				waitForNewQuestion = setInterval(userGuessed, 1000)
+				waitForNewQuestion = setInterval(userGuessed, 2000)
 			}
 
 			else
 			{
-				waitForNewQuestion = setInterval(done, 1000)
+				waitForNewQuestion = setInterval(done, 2000)
 			}
 		}
 
@@ -203,12 +205,12 @@ $(document).ready(function()
 			
 			if (questionsLeft !== 0)
 			{
-				waitForNewQuestion = setInterval(userGuessed, 1000)
+				waitForNewQuestion = setInterval(userGuessed, 2000)
 			}
 
 			else
 			{
-				waitForNewQuestion = setInterval(done, 1000)
+				waitForNewQuestion = setInterval(done, 2000)
 			}
 		}
 	})
