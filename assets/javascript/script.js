@@ -38,6 +38,7 @@ $(document).ready(function()
 	questionBank.push(question2)
 	questionBank.push(question3)
 	questionBank.push(question4)
+	console.log(questionBank)
 	var time = $('.time')
 	var result = $('.result')
 	var correctAnswer = $('.correctAnswer')
@@ -53,9 +54,9 @@ $(document).ready(function()
 
 	var run = function(newQuestion)
 	{
-		areWeDone()
 		console.log("counting this question, you have "+questionsLeft+" left")
 		questionBank.splice(0,1)
+		console.log("Questions left "+questionBank)
 		questionsLeft = questionsLeft - 1
 		currentQuestion = newQuestion
 		clearInterval(waitForNewQuestion)
@@ -104,43 +105,70 @@ $(document).ready(function()
 				result.html('OUT OF TIME!')
 				questionsWrong++;
 				correctAnswer.html(newQuestion.rightAnswer)
-				losses.html(questionsWrong)
 				clearInterval(runClock)
 				freeze = true
 
-				waitForNewQuestion = setInterval(function()
+				if (questionsLeft !== 0)
 				{
-					run(questionBank[0])
-					freeze = false
+					waitForNewQuestion = setInterval(userGuessed, 1000)
+				}
 
-				}, 3000)
+				else
+				{
+					waitForNewQuestion = setInterval(done, 1000)
+				}
 			}
 		}
 
 		getNewQuestion(newQuestion)
-
 		runClock = setInterval(countDown, 1000)
 	}
 
-	var areWeDone = function()
+	var shuffleArray = function(array)
 	{
-		if (questionsLeft===0)
-		{
-			$('.start').show()
-			$('.game-board').hide()
-			questionBank.push(question1)
-			questionBank.push(question2)
-			questionBank.push(question3)
-			questionBank.push(question4)
-			questionsLeft = questionBank.length
-		}		
+		
+	}
+
+	var userGuessed = function()
+	{
+		result.html("")
+		correctAnswer.html("")
+		freeze = false
+		run(questionBank[0])	
+	}
+
+	var done = function()
+	{
+		freeze = false
+		clearInterval(waitForNewQuestion)
+		var percent = Math.round(questionsCorrect/(questionsCorrect+questionsWrong)*100)
+		$('.start').show()
+		$('.game-board').hide()
+		$('.how-you-did').show()
+		$('.percent').html(percent+"%")
+		result.html("")
+		correctAnswer.html("")
+		wins.html(questionsCorrect)
+		losses.html(questionsWrong)
+		questionsCorrect  = 0
+		questionsWrong = 0
+		questionBank = []
+		console.log("questionBank before: "+questionBank)
+		questionBank.push(question1)
+		console.log("questionBank after pushing first question: "+questionBank)
+		questionBank.push(question2)
+		questionBank.push(question3)
+		questionBank.push(question4)
+		console.log("questionBank after: "+questionBank)
+		questionsLeft = questionBank.length	
 	}
 
 	$('.start').on('click', function()
-	{
-		run(questionBank[0])
-		$('.start').hide()
+	{ 
+		$('.how-you-did').hide()
 		$('.game-board').show()
+		$('.start').hide()
+		run(questionBank[0])
 	})
 
 	$('.answer-group').on('click', function()
@@ -151,33 +179,37 @@ $(document).ready(function()
 		{
 			result.html('CORRECT!')
 			questionsCorrect++;
-			wins.html(questionsCorrect)
 			clearInterval(runClock)
 			freeze = true
 
-			waitForNewQuestion = setInterval(function()
+			if (questionsLeft !== 0)
 			{
-				run(questionBank[0])
-				freeze = false
+				waitForNewQuestion = setInterval(userGuessed, 1000)
+			}
 
-			}, 3000)
+			else
+			{
+				waitForNewQuestion = setInterval(done, 1000)
+			}
 		}
 
-		else if( !freeze)
+		else if(!freeze)
 		{
 			result.html('WRONG!')
 			questionsWrong++;
 			correctAnswer.html(currentQuestion.rightAnswer)
-			losses.html(questionsWrong)
 			clearInterval(runClock)
 			freeze = true
-					
-			waitForNewQuestion = setInterval(function()
+			
+			if (questionsLeft !== 0)
 			{
-				run(questionBank[0])
-				freeze = false
+				waitForNewQuestion = setInterval(userGuessed, 1000)
+			}
 
-			}, 3000)
+			else
+			{
+				waitForNewQuestion = setInterval(done, 1000)
+			}
 		}
 	})
 });
