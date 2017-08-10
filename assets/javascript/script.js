@@ -46,9 +46,11 @@ $(document).ready(function()
 	var waitForNewQuestion;
 	var questionsCorrect = 0
 	var questionsWrong = 0
+	var currentQuestion;
 
 	var run = function(newQuestion)
 	{
+		currentQuestion = newQuestion
 		clearInterval(waitForNewQuestion)
 		console.log(questionBank)
 		var currentTime = 10
@@ -110,40 +112,6 @@ $(document).ready(function()
 
 		getNewQuestion(newQuestion)
 
-		$('.answer-group').on('click', function()
-		{
-			var usersPick = event.srcElement.textContent
-			console.log("The correct answer is "+newQuestion.rightAnswer)
-
-			if (usersPick === newQuestion.rightAnswer)
-			{
-				result.html('CORRECT!')
-				questionsCorrect++;
-				wins.html(questionsCorrect)
-				clearInterval(runClock)
-
-				waitForNewQuestion = setInterval(function()
-				{
-					run(questionBank[0])
-				}, 3000)
-
-			}
-
-			else
-			{
-				result.html('WRONG!')
-				questionsWrong++;
-				correctAnswer.html(newQuestion.rightAnswer)
-				losses.html(questionsWrong)
-				clearInterval(runClock)
-				
-				waitForNewQuestion = setInterval(function()
-				{
-					run(questionBank[0])
-				}, 3000)
-			}
-		})
-
 		runClock = setInterval(countDown, 1000)
 		questionBank.splice(0,1)
 	}
@@ -151,4 +119,37 @@ $(document).ready(function()
 	console.log(questionBank)
 	run(questionBank[0])
 	console.log("DO I SEE THIS MORE THAN ONCE!?")
+
+	$('.answer-group').on('click', function()
+	{
+		var usersPick = event.srcElement.textContent
+		console.log("The correct answer is "+currentQuestion.rightAnswer)
+
+		if (usersPick === currentQuestion.rightAnswer)
+		{
+			result.html('CORRECT!')
+			questionsCorrect++;
+			wins.html(questionsCorrect)
+			clearInterval(runClock)
+
+			waitForNewQuestion = setInterval(function()
+			{
+				run(questionBank[0])
+			}, 3000)
+		}
+
+		else
+		{
+			result.html('WRONG!')
+			questionsWrong++;
+			correctAnswer.html(currentQuestion.rightAnswer)
+			losses.html(questionsWrong)
+			clearInterval(runClock)
+					
+			waitForNewQuestion = setInterval(function()
+			{
+				run(questionBank[0])
+			}, 3000)
+		}
+	})
 });
