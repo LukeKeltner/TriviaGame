@@ -1,6 +1,10 @@
 body
 {
 	margin-top: 30px;
+	background-color: #d8a5ff;
+/* 	background: url('../images/background.jpg');\ */
+/* 	background-repeat:no-repeat;
+background-size:cover; */
 }
 
 img
@@ -16,4 +20,9 @@ img
 h1
 {
 	font-size: 90px;
+}
+
+.list-group-item
+{
+	font-size: 20px;
 }

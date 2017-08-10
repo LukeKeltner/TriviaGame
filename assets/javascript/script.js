@@ -9,28 +9,28 @@ $(document).ready(function()
 	}
 
 	var question1 = new question(
-		'Here is the questions! Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah', 
-		'Corrent Answer', 
-		['wrong 1', 'wrong 2', 'wrong 3'], 
-		'http://i.ndtvimg.com/i/2017-01/woman-illusion_650x400_61484043713.jpg')
+		'Which creature is described as having a human head, torso and arms joined to a horse\'s body which may be any of several colours.  Being intelligent and capable of speech, it should not strictly speaking be termed a beast, but by its own request it has been classified as such by the Ministry of Magic?', 
+		'Centaur', 
+		['Squib', 'Muggle', 'Hungarian Horntail'], 
+		'assets/images/ministryofmagic.jpg')
 
 	var question2 = new question(
-		'Here is a second question!',
-		'Here is the CORRECT answer to 2',
-		['wrong 12', 'wrong 22', 'wrong 32'],
-		'http://images5.fanpop.com/image/photos/30900000/beautiful-pic-different-beautiful-pictures-30958251-500-313.jpg')
+		'Which Quidditch team from Northern England was founded in 1612 and is known for their pale blue robes?',
+		'Appleby Arrows',
+		['Caerphilly Catapults', 'Chudley Cannons', 'Puddlemere United'],
+		'assets/images/quidditch.png')
 
 	var question3 = new question(
-		'Here is number 3',
-		'the correct answer to 3!',
-		['wrongggg', 'wrosdsdf', 'svsdv dfg'],
-		'http://www.abc.net.au/news/image/7369752-16x9-940x529.jpg')
+		"In 'The Tale of the Three Brothers' what does Death give the youngest brother?",
+		'Death\'s own cloak',
+		['A wand fashioned from a branch', 'A stone from the riverbank', 'Immortality'],
+		'assets/images/death.jpg')
 
 	var question4 = new question(
-		'Here is number 4',
-		'the correct answer to 4!',
-		['wrongsdfsdfsdfggg', 'wrosdfsdfsddsdf', 'svssdfsdfdv dfsdfsdfsdfg'],
-		'https://pbs.twimg.com/profile_images/378800000748859587/289a592b2989b6f2dabb76db7fc25947_400x400.jpeg')
+		'What did Ron see in the Mirror of Erised?',
+		'Him being Head Boy and the Quidditch Captin',
+		['His brothers\' admiring him', 'An perfect scor eon his O.W.L.s', 'He and Hermonie together'],
+		'assets/images/mirror.jpg')
 
 	var shuffleArray = function(array)
 	{
@@ -79,7 +79,7 @@ $(document).ready(function()
 		questionsLeft = questionsLeft - 1
 		currentQuestion = newQuestion
 		clearInterval(waitForNewQuestion)
-		var currentTime = 10
+		var currentTime = 20
 		time.html(currentTime)
 
 		var getNewQuestion = function(question)
