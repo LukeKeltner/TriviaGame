@@ -1,7 +1,7 @@
 body
 {
 	margin-top: 30px;
-	background-color: #d8a5ff;
+	background-color: white
 /* 	background: url('../images/background.jpg');\ */
 /* 	background-repeat:no-repeat;
 background-size:cover; */
@@ -25,4 +25,14 @@ h1
 .list-group-item
 {
 	font-size: 20px;
+}
+
+.game-board
+{
+	display: none;
+}
+
+.progress-bar
+{
+	width: 0%;
 }

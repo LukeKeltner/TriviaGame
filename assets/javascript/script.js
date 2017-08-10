@@ -28,9 +28,12 @@ $(document).ready(function()
 
 	var question4 = new question(
 		'What did Ron see in the Mirror of Erised?',
-		'Him being Head Boy and the Quidditch Captin',
-		['His brothers\' admiring him', 'An perfect scor eon his O.W.L.s', 'He and Hermonie together'],
+		'Him being Head Boy and the Quidditch Captain',
+		['His brothers admiring him', 'An perfect score on his O.W.L.s', 'He and Hermonie together'],
 		'assets/images/mirror.jpg')
+
+	var maxQuestions;
+	var questionsCompleted = 0;
 
 	var shuffleArray = function(array)
 	{
@@ -54,8 +57,11 @@ $(document).ready(function()
 		questionBank.push(question3)
 		questionBank.push(question4)
 		questionBank = shuffleArray(questionBank)
+		maxQuestions = questionBank.length
 	}
 
+	var progressBar = $('.progress-bar')
+	var progressWidth;
 	var questionBank = []
 	getQuestionBank()
 	var time = $('.time')
@@ -120,6 +126,7 @@ $(document).ready(function()
 				correctAnswer.html(newQuestion.rightAnswer)
 				clearInterval(runClock)
 				freeze = true
+		
 
 				if (questionsLeft !== 0)
 				{
@@ -128,6 +135,9 @@ $(document).ready(function()
 
 				else
 				{
+					questionsCompleted++;
+					progressWidth = questionsCompleted/maxQuestions*100
+					progressBar.css('width', progressWidth+'%')
 					waitForNewQuestion = setInterval(done, 2000)
 				}
 			}
@@ -142,7 +152,10 @@ $(document).ready(function()
 		result.html("")
 		correctAnswer.html("")
 		freeze = false
-		run(questionBank[0])	
+		run(questionBank[0])
+		questionsCompleted++;
+		progressWidth = questionsCompleted/maxQuestions*100
+		progressBar.css('width', progressWidth+'%')
 	}
 
 	var done = function()
@@ -160,6 +173,7 @@ $(document).ready(function()
 		losses.html(questionsWrong)
 		questionsCorrect  = 0
 		questionsWrong = 0
+		questionsCompleted = 0
 		questionBank = []
 		getQuestionBank()
 		questionsLeft = questionBank.length	
@@ -167,6 +181,8 @@ $(document).ready(function()
 
 	$('.start').on('click', function()
 	{ 
+		progressBar.css('width', '0%')
+		$('.initial').hide()
 		$('.how-you-did').hide()
 		$('.game-board').show()
 		$('.start').hide()
@@ -183,6 +199,7 @@ $(document).ready(function()
 			questionsCorrect++;
 			clearInterval(runClock)
 			freeze = true
+	
 
 			if (questionsLeft !== 0)
 			{
@@ -191,6 +208,9 @@ $(document).ready(function()
 
 			else
 			{
+				questionsCompleted++;
+				progressWidth = questionsCompleted/maxQuestions*100
+				progressBar.css('width', progressWidth+'%')
 				waitForNewQuestion = setInterval(done, 2000)
 			}
 		}
@@ -202,6 +222,7 @@ $(document).ready(function()
 			correctAnswer.html(currentQuestion.rightAnswer)
 			clearInterval(runClock)
 			freeze = true
+	
 			
 			if (questionsLeft !== 0)
 			{
@@ -210,6 +231,9 @@ $(document).ready(function()
 
 			else
 			{
+				questionsCompleted++;
+				progressWidth = questionsCompleted/maxQuestions*100
+				progressBar.css('width', progressWidth+'%')
 				waitForNewQuestion = setInterval(done, 2000)
 			}
 		}
