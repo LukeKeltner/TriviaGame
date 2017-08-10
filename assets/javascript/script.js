@@ -32,6 +32,7 @@ $(document).ready(function()
 		['wrongsdfsdfsdfggg', 'wrosdfsdfsddsdf', 'svssdfsdfdv dfsdfsdfsdfg'],
 		'https://pbs.twimg.com/profile_images/378800000748859587/289a592b2989b6f2dabb76db7fc25947_400x400.jpeg')
 
+	$('game-board').hide()
 	var questionBank = []
 	questionBank.push(question1)
 	questionBank.push(question2)
@@ -47,12 +48,17 @@ $(document).ready(function()
 	var questionsCorrect = 0
 	var questionsWrong = 0
 	var currentQuestion;
+	var questionsLeft = questionBank.length
+	var freeze = false;
 
 	var run = function(newQuestion)
 	{
+		areWeDone()
+		console.log("counting this question, you have "+questionsLeft+" left")
+		questionBank.splice(0,1)
+		questionsLeft = questionsLeft - 1
 		currentQuestion = newQuestion
 		clearInterval(waitForNewQuestion)
-		console.log(questionBank)
 		var currentTime = 10
 		time.html(currentTime)
 
@@ -92,63 +98,85 @@ $(document).ready(function()
 		{
 			currentTime = currentTime - 1;
 			time.html(currentTime)
-			console.log(currentTime)
 
-			if (currentTime === 0)
+			if (currentTime === 0 && !freeze)
 			{
 				result.html('OUT OF TIME!')
 				questionsWrong++;
 				correctAnswer.html(newQuestion.rightAnswer)
 				losses.html(questionsWrong)
 				clearInterval(runClock)
+				freeze = true
 
 				waitForNewQuestion = setInterval(function()
 				{
 					run(questionBank[0])
+					freeze = false
+
 				}, 3000)
 			}
-
 		}
 
 		getNewQuestion(newQuestion)
 
 		runClock = setInterval(countDown, 1000)
-		questionBank.splice(0,1)
 	}
 
-	console.log(questionBank)
-	run(questionBank[0])
-	console.log("DO I SEE THIS MORE THAN ONCE!?")
+	var areWeDone = function()
+	{
+		if (questionsLeft===0)
+		{
+			$('.start').show()
+			$('.game-board').hide()
+			questionBank.push(question1)
+			questionBank.push(question2)
+			questionBank.push(question3)
+			questionBank.push(question4)
+			questionsLeft = questionBank.length
+		}		
+	}
+
+	$('.start').on('click', function()
+	{
+		run(questionBank[0])
+		$('.start').hide()
+		$('.game-board').show()
+	})
 
 	$('.answer-group').on('click', function()
 	{
 		var usersPick = event.srcElement.textContent
-		console.log("The correct answer is "+currentQuestion.rightAnswer)
 
-		if (usersPick === currentQuestion.rightAnswer)
+		if (usersPick === currentQuestion.rightAnswer && !freeze)
 		{
 			result.html('CORRECT!')
 			questionsCorrect++;
 			wins.html(questionsCorrect)
 			clearInterval(runClock)
+			freeze = true
 
 			waitForNewQuestion = setInterval(function()
 			{
 				run(questionBank[0])
+				freeze = false
+
 			}, 3000)
 		}
 
-		else
+		else if( !freeze)
 		{
 			result.html('WRONG!')
 			questionsWrong++;
 			correctAnswer.html(currentQuestion.rightAnswer)
 			losses.html(questionsWrong)
 			clearInterval(runClock)
+			freeze = true
 					
 			waitForNewQuestion = setInterval(function()
 			{
 				run(questionBank[0])
+				freeze = false
+
 			}, 3000)
 		}
 	})
