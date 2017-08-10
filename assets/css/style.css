@@ -8,6 +8,13 @@ body
 background-size:cover; */
 }
 
+/* .jumbotron
+{
+	background: url('../images/HarryPotter.png');
+	background-size: 70%;
+	align-content: center
+}
+ */
 img
 {
 	width:100%;

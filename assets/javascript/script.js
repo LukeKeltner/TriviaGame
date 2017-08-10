@@ -32,6 +32,7 @@ $(document).ready(function()
 		['His brothers admiring him', 'An perfect score on his O.W.L.s', 'He and Hermonie together'],
 		'assets/images/mirror.jpg')
 
+	var tick = new Audio('assets/sounds/tick.mp3')
 	var maxQuestions;
 	var questionsCompleted = 0;
 
@@ -85,7 +86,7 @@ $(document).ready(function()
 		questionsLeft = questionsLeft - 1
 		currentQuestion = newQuestion
 		clearInterval(waitForNewQuestion)
-		var currentTime = 20
+		var currentTime = 15
 		time.html(currentTime)
 
 		var getNewQuestion = function(question)
@@ -117,6 +118,7 @@ $(document).ready(function()
 		var countDown = function()
 		{
 			currentTime = currentTime - 1;
+			tick.play()
 			time.html(currentTime)
 
 			if (currentTime === 0 && !freeze)
