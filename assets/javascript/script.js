@@ -32,6 +32,26 @@ $(document).ready(function()
 		['His brothers admiring him', 'An perfect score on his O.W.L.s', 'He and Hermonie together'],
 		'assets/images/mirror.jpg')
 
+	var question5 = new question(
+		'Dudley was very upset to learn that Harry must come to the zoo with him for his birthday.  At least Dudley had his best friend with him.  What is his name?',
+		'Piers Polkiss',
+		['Thomas Trinkle', 'Stewart Sursis', 'Richard Rhomlick'],
+		'assets/images/dursleys.png')
+
+	var question6 = new question(
+		'Harry met Dobby for the first time in his bedroom. Whom did the Dursley\'s have over for dinner that same night?',
+		'The Masons',
+		['Aunt Marge', 'Mrs. Figg', 'Petunia Dursley\'s sister, Lily'],
+		'assets/images/harrydobby.jpg')
+
+	var question7 = new question(
+		'At the beginning of their third year at Hogwarts, Ron glances over at Hermonie\'s class schedule and realizes she is scheduled for three different classes all at nine o\' clock.  What are these three classes?',
+		'Divination, Muggle Studies, and Arithmancy',
+		['Potions, Defense Against the Dark Arts, and Herbology', 'History of Magic, Potions, and Muggle Studies', 'Arithmancy, Potions, and Defense Against the Dark Arts'],
+		'assets/images/hermione.jpg')
+
+
+
 	var tick = new Audio('assets/sounds/tick.mp3')
 	var maxQuestions;
 	var questionsCompleted = 0;
@@ -57,6 +77,9 @@ $(document).ready(function()
 		questionBank.push(question2)
 		questionBank.push(question3)
 		questionBank.push(question4)
+		questionBank.push(question5)
+		questionBank.push(question6)
+		questionBank.push(question7)
 		questionBank = shuffleArray(questionBank)
 		maxQuestions = questionBank.length
 	}
