@@ -39,7 +39,7 @@ $(document).ready(function()
 		'assets/images/dursleys.png')
 
 	var question6 = new question(
-		'Harry met Dobby for the first time in his bedroom. Whom did the Dursley\'s have over for dinner that same night?',
+		'Harry met Dobby for the first time in his bedroom. Whom did the Dursleys have over for dinner that same night?',
 		'The Masons',
 		['Aunt Marge', 'Mrs. Figg', 'Petunia Dursley\'s sister, Lily'],
 		'assets/images/harrydobby.jpg')
@@ -49,6 +49,59 @@ $(document).ready(function()
 		'Divination, Muggle Studies, and Arithmancy',
 		['Potions, Defense Against the Dark Arts, and Herbology', 'History of Magic, Potions, and Muggle Studies', 'Arithmancy, Potions, and Defense Against the Dark Arts'],
 		'assets/images/hermione.jpg')
+
+	var question8 = new question(
+		'The first time Harry got on the Knight Bus he was asked who he was.  Who did Harry say he was?',
+		'Neville Longbottom',
+		['Ron Weasley', 'Draco Malfoy', 'Colin Creevey'],
+		'assets/images/bus.jpg')
+
+	var question9 = new question(
+		'Whose son put Harry Potter\'s name in the Goblet of Fire?',
+		'Bartemius Crouch',
+		['Alastor Moody', 'Igor Karkaroff', 'Ludovic Bagman'],
+		'assets/images/goblet.jpg')
+
+	var question10 = new question(
+		'Where did Hermonie learn about the Beauxbatons Academy of Magic?',
+		'An Appraisal of Magical Education in Europe',
+		['The Standard Book of Spells, Grade 3', 'Beauxbatons Academy - A History', 'The Monster Book of Monsters'],
+		'assets/images/beauxbatons.png')
+
+	var question11 = new question(
+		"In large words above the Black\'s family tree reads 'The Noble and Most Ancient House of Black'.  What saying is right below?",
+		'Toujours Pur',
+		['Pure-Sang', 'Magicien Pur', 'Toujours Juste'],
+		'assets/images/black.jpg')
+
+	var question12 = new question(
+		'Who was St. Mungo\'s Healer from 1722-1741, Headmistress of Hogwarts from 1741-1768, and winked at Harry from her portrait in St. Mungo\'s Hospital?',
+		'Dilys Derwent',
+		['Alecto Carrow', 'Marietta Edgecombe', 'Irma Pince'],
+		'assets/images/hospital.jpg')
+
+	var question13 = new question(
+		'What is the street name where Severus Snape\'s childhood home is located?',
+		'Spinner\'s End',
+		['Godric\'s Hollow', 'Privet Drive', 'Grimmauld Place'],
+		'assets/images/snape.jpg')
+
+
+
+	var colorTheme = function(color1, color2, color3)
+	{
+		$('.jumbotron').css('background-color', color1)
+		$('.stripe').css('background-color', color2)
+		$('.stripe2').css('background-color', color2)
+		$('.time').css('color', color3)
+
+	}
+
+	var r = Math.floor(Math.random()*4)
+	var randomTheme = [['#740001', '#eeba30', 'white'], ['#222f5b', '#777777', 'white'], ['#ecb939', '#372e29', 'white'], ['#2a623d', '#aaaaaa', 'white']]
+	
+	colorTheme(randomTheme[r][0], randomTheme[r][1], randomTheme[r][2])
+
 
 
 
@@ -80,6 +133,12 @@ $(document).ready(function()
 		questionBank.push(question5)
 		questionBank.push(question6)
 		questionBank.push(question7)
+		questionBank.push(question8)
+		questionBank.push(question9)
+		questionBank.push(question10)
+		questionBank.push(question11)
+		questionBank.push(question12)
+		questionBank.push(question13)
 		questionBank = shuffleArray(questionBank)
 		maxQuestions = questionBank.length
 	}
@@ -103,6 +162,8 @@ $(document).ready(function()
 
 	var run = function(newQuestion)
 	{
+		var rand = Math.floor(Math.random()*4)
+		colorTheme(randomTheme[rand][0], randomTheme[rand][1], randomTheme[rand][2])
 		console.log("counting this question, you have "+questionsLeft+" left")
 		questionBank.splice(0,1)
 		console.log("Questions left "+questionBank)
@@ -188,7 +249,9 @@ $(document).ready(function()
 		$('.start').show()
 		$('.game-board').hide()
 		$('.how-you-did').show()
-		$('.percent').html(percent+"%")
+		$('.timer-container').html("All Done!")
+		$('.time').html(percent+"%")
+		$('.timer-container').show()
 		result.html("")
 		correctAnswer.html("")
 		wins.html(questionsCorrect)
@@ -204,6 +267,8 @@ $(document).ready(function()
 	$('.start').on('click', function()
 	{ 
 		progressBar.css('width', '0%')
+		$('.timer-container').hide()
+		$('.time').show()
 		$('.initial').hide()
 		$('.how-you-did').hide()
 		$('.game-board').show()

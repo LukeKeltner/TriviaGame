@@ -10,9 +10,8 @@ background-size:cover; */
 
 .jumbotron
 {
-/* 	background: url('../images/HarryPotter.png');
-background-size: 70%;
-align-content: center */
+	position: relative;
+	background-color: #222f5b;
 }
 
 img
@@ -46,3 +45,45 @@ h1
 {
 	width: 0%;
 }
+
+.time
+{
+	display:none;
+	font-size: 80px;
+}
+
+.timer-container
+{
+	z-index: 20;
+	color:white;
+}
+
+.jumbotron h1
+{
+	color:white;	
+}
+
+.stripe
+{
+	position: absolute;
+	width:1%;
+	background-color: #5d5d5d;
+	height:100%;
+	top:0px;
+	left:5%;
+	z-index:0;
+	opacity: .99;
+}
+
+.stripe2
+{
+	position: absolute;
+	width:1%;
+	background-color: #5d5d5d;
+	height:100%;
+	top:0px;
+	left:10%;
+	z-index:0;
+	opacity: .99;
+}
+
