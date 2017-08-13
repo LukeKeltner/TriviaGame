@@ -86,3 +86,9 @@ h1
 	z-index:0;
 	opacity: .99;
 }
+
+.btn
+{
+    white-space:normal !important;
+    word-wrap: break-word; 
+}
