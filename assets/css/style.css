@@ -54,7 +54,7 @@ h1
 
 .timer-container
 {
-	z-index: 20;
+	z-index: 1;
 	color:white;
 }
 
@@ -66,7 +66,7 @@ h1
 .stripe
 {
 	position: absolute;
-	width:1%;
+	width:10px;
 	background-color: #5d5d5d;
 	height:100%;
 	top:0px;
@@ -78,7 +78,7 @@ h1
 .stripe2
 {
 	position: absolute;
-	width:1%;
+	width:10px;
 	background-color: #5d5d5d;
 	height:100%;
 	top:0px;
@@ -86,4 +86,3 @@ h1
 	z-index:0;
 	opacity: .99;
 }
-

@@ -10,7 +10,7 @@ $(document).ready(function()
 
 	var question1 = new question(
 		'Which creature is described as having a human head, torso and arms joined to a horse\'s body which may be any of several colours.  Being intelligent and capable of speech, it should not strictly speaking be termed a beast, but by its own request it has been classified as such by the Ministry of Magic?', 
-		'Centaur', 
+		'Centaur',
 		['Squib', 'Muggle', 'Hungarian Horntail'], 
 		'assets/images/ministryofmagic.jpg')
 
@@ -63,10 +63,10 @@ $(document).ready(function()
 		'assets/images/goblet.jpg')
 
 	var question10 = new question(
-		'Where did Hermonie learn about the Beauxbatons Academy of Magic?',
+		'Where did Hermione learn about the Beauxbatons Academy of Magic?',
 		'An Appraisal of Magical Education in Europe',
 		['The Standard Book of Spells, Grade 3', 'Beauxbatons Academy - A History', 'The Monster Book of Monsters'],
-		'assets/images/beauxbatons.png')
+		'assets/images/beauxbatons.jpg')
 
 	var question11 = new question(
 		"In large words above the Black\'s family tree reads 'The Noble and Most Ancient House of Black'.  What saying is right below?",
@@ -106,6 +106,7 @@ $(document).ready(function()
 
 
 	var tick = new Audio('assets/sounds/tick.mp3')
+	var hurry = new Audio('assets/sounds/hurry.mp3')
 	var maxQuestions;
 	var questionsCompleted = 0;
 
@@ -159,6 +160,7 @@ $(document).ready(function()
 	var currentQuestion;
 	var questionsLeft = questionBank.length
 	var freeze = false;
+	var doubleTick;
 
 	var run = function(newQuestion)
 	{
@@ -205,6 +207,14 @@ $(document).ready(function()
 			tick.play()
 			time.html(currentTime)
 
+			if (currentTime <= 5 && currentTime !== 0)
+			{
+				doubleTick = setTimeout(function()
+				{
+					tick.play()
+				}, 1000 * 0.5)
+			}
+
 			if (currentTime === 0 && !freeze)
 			{
 				result.html('OUT OF TIME!')
@@ -249,9 +259,7 @@ $(document).ready(function()
 		$('.start').show()
 		$('.game-board').hide()
 		$('.how-you-did').show()
-		$('.timer-container').html("All Done!")
 		$('.time').html(percent+"%")
-		$('.timer-container').show()
 		result.html("")
 		correctAnswer.html("")
 		wins.html(questionsCorrect)
@@ -267,6 +275,7 @@ $(document).ready(function()
 	$('.start').on('click', function()
 	{ 
 		progressBar.css('width', '0%')
+		$('.start').html("Try again!")
 		$('.timer-container').hide()
 		$('.time').show()
 		$('.initial').hide()
