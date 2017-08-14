@@ -102,9 +102,6 @@ $(document).ready(function()
 	
 	colorTheme(randomTheme[r][0], randomTheme[r][1], randomTheme[r][2])
 
-
-
-
 	var tick = new Audio('assets/sounds/tick.mp3')
 	var hurry = new Audio('assets/sounds/hurry.mp3')
 	var maxQuestions;
@@ -285,9 +282,9 @@ $(document).ready(function()
 		run(questionBank[0])
 	})
 
-	$('.answer-group').on('click', function()
+	$('.answer-group').on('click', function(event)
 	{
-		var usersPick = event.srcElement.textContent
+		var usersPick = event.target.textContent
 
 		if (usersPick === currentQuestion.rightAnswer && !freeze)
 		{
