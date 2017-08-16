@@ -94,7 +94,6 @@ $(document).ready(function()
 		$('.stripe').css('background-color', color2)
 		$('.stripe2').css('background-color', color2)
 		$('.time').css('color', color3)
-
 	}
 
 	var r = Math.floor(Math.random()*4)
@@ -222,7 +221,6 @@ $(document).ready(function()
 				questionsCompleted++;
 				progressWidth = questionsCompleted/maxQuestions*100
 				progressBar.css('width', progressWidth+'%')
-		
 
 				if (questionsLeft !== 0)
 				{
@@ -284,6 +282,7 @@ $(document).ready(function()
 
 	$('.answer-group').on('click', function(event)
 	{
+		console.log(event)
 		var usersPick = event.target.textContent
 
 		if (usersPick === currentQuestion.rightAnswer && !freeze)
@@ -296,7 +295,6 @@ $(document).ready(function()
 			progressWidth = questionsCompleted/maxQuestions*100
 			progressBar.css('width', progressWidth+'%')
 	
-
 			if (questionsLeft !== 0)
 			{
 				waitForNewQuestion = setInterval(userGuessed, 2000)
@@ -308,7 +306,7 @@ $(document).ready(function()
 			}
 		}
 
-		else if(!freeze)
+		else if(!freeze && event.target.tagName !== 'DIV')
 		{
 			result.html('WRONG!')
 			questionsWrong++;
@@ -318,8 +316,7 @@ $(document).ready(function()
 			questionsCompleted++;
 			progressWidth = questionsCompleted/maxQuestions*100
 			progressBar.css('width', progressWidth+'%')
-	
-			
+		
 			if (questionsLeft !== 0)
 			{
 				waitForNewQuestion = setInterval(userGuessed, 2000)
