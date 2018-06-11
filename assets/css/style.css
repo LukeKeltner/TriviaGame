@@ -1,0 +1,94 @@
+body
+{
+	margin-top: 30px;
+	margin-bottom:30px;
+	background-color: white
+/* 	background: url('../images/background.jpg');\ */
+/* 	background-repeat:no-repeat;
+background-size:cover; */
+}
+
+.jumbotron
+{
+	position: relative;
+	background-color: #222f5b;
+}
+
+img
+{
+	width:100%;
+	margin-top: 20px;
+}
+
+.how-you-did
+{
+	display:none;
+}
+
+h1
+{
+	font-size: 90px;
+}
+
+.list-group-item
+{
+	font-size: 20px;
+}
+
+.game-board
+{
+	display: none;
+}
+
+
+.progress-bar
+{
+	width: 0%;
+}
+
+.time
+{
+	display:none;
+	font-size: 80px;
+}
+
+.timer-container
+{
+	z-index: 1;
+	color:white;
+}
+
+.jumbotron h1
+{
+	color:white;	
+}
+
+.stripe
+{
+	position: absolute;
+	width:10px;
+	background-color: #5d5d5d;
+	height:100%;
+	top:0px;
+	left:5%;
+	z-index:0;
+	opacity: .99;
+}
+
+.stripe2
+{
+	position: absolute;
+	width:10px;
+	background-color: #5d5d5d;
+	height:100%;
+	top:0px;
+	left:10%;
+	z-index:0;
+	opacity: .99;
+}
+
+.btn
+{
+    white-space:normal !important;
+    word-wrap: break-word; 
+}
